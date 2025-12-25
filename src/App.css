@@ -51,12 +51,13 @@ html, body {
   border: 2px solid #0b35f0;
   background-color: transparent;
   padding: 0;
-  height: 34px;
-  width: 62px;
+  height: 38px;
+  width: 64px;
   margin-bottom: 8px;
   border-radius: 24px;
   font-weight: 600;
   font-size: 12px;
+  transition: transform 0.1s ease-out;
 
 
 
@@ -67,4 +68,8 @@ html, body {
 .loginBtn:hover {
   background-color: #0000003a;
   cursor: pointer;
+}
+
+.loginBtn:active {
+  transform: scale(0.98);
 }
