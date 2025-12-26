@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useState } from 'react';
 import { Nav } from './components/Nav'
 import { Carousel } from './components/Carousel'
 import './App.css'
@@ -8,12 +8,44 @@ import arrow from './assets/arrow.webp'
 import classes from './assets/classes.webp';
 import JEE from './assets/JEE Courses.webp';
 import NEET from './assets/Neet Courses.webp';
+import { CourseCard } from './components/CourseCard'
+
 // import { BrowserRouter, Router, Route } from 'react-router-dom';
 const App = () => {
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const data = [
+    {img: NEET, h3: 'NEET Courses'},
+    {img: JEE, h3: 'JEE Courses'},
+    {img: classes, h3: 'Courses for class 6-10'}
+  ]
+
+
+  const dotStyles = {
+    borderRadius: '50%', 
+    width: '12px', 
+    height: '12px', 
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease-out'
+  }
+
+  
+
+  const activeColor='#1C1D1D';
+  const inactiveColor='#0F0F0F33';
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    setActiveIndex(prevIndex => (prevIndex < 3 ? prevIndex + 1 : 0))
+  }, 7000)
+  return () => clearInterval(interval);
+}, [activeIndex]);
+
   return (
     <div className='wrapper'>
       <Nav></Nav>
-      <div style={{width: '100%', height: '40px', backgroundColor: '#019370', display: 'flex', justifyContent: 'center', alignItems: 'center', userSelect: 'none'}}>
+      <div style={{width: '100%', height: '40px', backgroundColor: '#019370', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', userSelect: 'none'}}>
         <div style={{display: 'flex', alignItems: 'center'}}>
           <img width={32} draggable={false} src={loud} alt={"Speaker"} style={{aspectRatio: '1/1'}} />
           <span style={{color: '#F8FD05', fontSize: '12px', fontWeight: 600}}>LAST CHANCE TO GET 15% OFF</span>
@@ -25,45 +57,36 @@ const App = () => {
         </div>
       </div>
       <div style={{backgroundColor: '#edf2fa', display: 'flex', flexDirection: 'column', paddingBottom: '50px'}}>
-        <Carousel></Carousel>
+        <Carousel activeIndex={activeIndex}></Carousel>
         <div style={{display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '14px'}}>
-          <div style={{borderRadius: '50%', width: '12px', height: '12px', backgroundColor: '#1C1D1D', cursor: 'pointer'}}></div>
-          <div style={{borderRadius: '50%', width: '12px', height: '12px', backgroundColor: '#0F0F0F33', cursor: 'pointer'}}></div>
-          <div style={{borderRadius: '50%', width: '12px', height: '12px', backgroundColor: '#0F0F0F33', cursor: 'pointer'}}></div>
-          <div style={{borderRadius: '50%', width: '12px', height: '12px', backgroundColor: '#0F0F0F33', cursor: 'pointer'}}></div>
+
+          {[0, 1, 2, 3].map((index) => (
+            <div
+            key={index}
+            onClick={() => setActiveIndex(index)}
+            style={{...dotStyles, backgroundColor: index===activeIndex ? activeColor : inactiveColor}}
+            ></div>
+          ))}
+
         </div>
       </div>
 
       <div style={{width: '1032px', display: 'flex', flexDirection: 'column', margin: '0 auto', userSelect: 'none'}}>
         <h2 style={{margin: 0, marginTop: '52px', fontSize: '24px'}}>Pick the right course for you</h2>
+
+      {/* Course Cards */}
         <div style={{padding: '24px 0 0 0', display: 'flex', backgroundColor: 'white', gap: '36px', paddingBottom: '50px'}}>
-          <div style={{backgroundColor: '#edf2fa', width: '100%', borderRadius: '20px', padding: '24px', height: '192px', display: 'flex', justifyContent: 'space-between', flexDirection: 'column', position: 'relative'}}>
-            <h3 style={{fontSize: '20px', margin: 0}}>NEET Courses</h3>
-            <img style={{position: 'absolute', width: '315px', bottom: 0, right: 0}} src={NEET} />
-            <div style={{display: 'flex'}}>
-              <h2 style={{fontSize: '16px', color: '#025FCA', cursor: 'pointer', margin: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', marginBottom: '3px', zIndex: 1}}>View Courses </h2>
-              <svg style={{marginTop: '16px', cursor: 'pointer', zIndex: 1}} fill={"none"} height={"24" }viewBox={"0 0 20 20"} width={"24"} xmlns={"http://www.w3.org/2000/svg"}><path d={"M7.5 15L12.5 10L7.5 5"} stroke={"#0266DA"} stroke-linecap={"round"} stroke-linejoin={"round"} stroke-width={"1.5"}></path></svg>
-            </div>
-            
-          </div>
-          <div style={{backgroundColor: '#edf2fa', width: '100%', borderRadius: '20px', padding: '24px', height: '192px', display: 'flex', justifyContent: 'space-between', flexDirection: 'column', position: 'relative'}}>
-            <h3 style={{fontSize: '20px', margin: 0}}>JEE Courses</h3>
-            <img style={{position: 'absolute', width: '315px', bottom: 0, right: 0}} src={JEE} />
-            <div style={{display: 'flex'}}>
-              <h2 style={{fontSize: '16px', color: '#025FCA', cursor: 'pointer', margin: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', marginBottom: '3px', zIndex: 1}}>View Courses </h2>
-              <svg style={{marginTop: '16px', cursor: 'pointer', zIndex: 1}} fill="none" height="24" viewBox="0 0 20 20" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 15L12.5 10L7.5 5" stroke="#0266DA" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-            </div>
-            
-          </div>
-          <div style={{backgroundColor: '#edf2fa', width: '100%', borderRadius: '16px', padding: '24px', height: '192px', display: 'flex', justifyContent: 'space-between', flexDirection: 'column', position: 'relative'}}>
-            <h3 style={{fontSize: '20px', margin: 0}}>Courses for class 6-10</h3>
-            <img style={{position: 'absolute', width: '315px', bottom: 0, right: 0}} src={classes} />
-            <div style={{display: 'flex'}}>
-              <h2 style={{fontSize: '16px', color: '#025FCA', cursor: 'pointer', margin: 0, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', marginBottom: '3px', zIndex: 1}}>View Courses </h2>
-              <svg style={{marginTop: '16px', cursor: 'pointer', zIndex: 1}} fill="none" height="24" viewBox="0 0 20 20" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 15L12.5 10L7.5 5" stroke="#0266DA" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path></svg>
-            </div>
-            
-          </div>
+
+            {data.map((prev, index) => (
+              <CourseCard 
+                key={index}
+                streamHeading={prev.h3}
+                streamImage={prev.img}
+              />
+            ))}
+
+
+
         </div>
       </div>
 

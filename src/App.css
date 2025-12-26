@@ -73,3 +73,18 @@ html, body {
 .loginBtn:active {
   transform: scale(0.98);
 }
+
+@keyframes slidingIn {
+  from {
+    opacity: 0;
+    transform: translateX(28vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-animation {
+  animation: slidingIn 0.5s ease-in-out;
+}
