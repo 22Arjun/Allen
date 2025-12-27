@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
-import { Nav } from './components/Nav'
-import { Carousel } from './components/Carousel'
-import './App.css'
-import loud from './assets/loud.png'
-import shine from './assets/star.webp'
-import arrow from './assets/arrow.webp'
+import { Nav } from './components/Nav';
+import { Carousel } from './components/Carousel';
+import './App.css';
+import loud from './assets/loud.png';
+import shine from './assets/star.webp';
+import arrow from './assets/arrow.webp';
 import classes from './assets/classes.webp';
 import JEE from './assets/JEE Courses.webp';
 import NEET from './assets/Neet Courses.webp';
-import { CourseCard } from './components/CourseCard'
+import { CourseCard } from './components/CourseCard';
+import { ClickButton } from './components/ClickButton';
 
 // import { BrowserRouter, Router, Route } from 'react-router-dom';
 const App = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeButton, setActiveButton] = useState({});
 
   const data = [
     {img: NEET, h3: 'NEET Courses'},
@@ -30,10 +32,11 @@ const App = () => {
     transition: 'background-color 0.3s ease-out'
   }
 
-  
+ 
 
   const activeColor='#1C1D1D';
   const inactiveColor='#0F0F0F33';
+
 
 useEffect(() => {
   const interval = setInterval(() => {
@@ -41,6 +44,21 @@ useEffect(() => {
   }, 7000)
   return () => clearInterval(interval);
 }, [activeIndex]);
+
+
+const buttonData = [
+    { text : 'NEET' },
+    { text : 'JEE' },
+    { text : 'Class 6-10' }
+  ]
+
+  const activeStyles = {
+        border: '1px solid #0266da',
+        backgroundColor: '#D5E8FF',
+        color: '#1E1E22'
+    }
+  
+
 
   return (
     <div className='wrapper'>
@@ -91,7 +109,20 @@ useEffect(() => {
       </div>
 
       <div style={{backgroundColor: '#f7f9ff', width: '100%', height: '114px'}}>
+        <div style={{width: '1032px', display: 'flex', flexDirection: 'column', margin: '0 auto', userSelect: 'none'}}>
+          <h2>Trending Courses</h2>
+          <div style={{display: 'flex', gap: '12px'}}>
+            {buttonData.map((button, index) => ( <ClickButton 
+              key={index}
+              onClick={() => setActiveButton(index)}
+              text={button.text}
+              style={{...(activeButton===index ? activeStyles : {})}}
+            />
 
+            ))}
+            
+          </div>
+        </div>
       </div>
 
     </div>

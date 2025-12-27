@@ -88,3 +88,24 @@ html, body {
 .fade-animation {
   animation: slidingIn 0.5s ease-in-out;
 }
+
+.streamButton {
+  display: flex;
+  font-size: 12px;
+  color: #1E1E22;
+  background-color: transparent;
+  padding: 10.5px 16px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #c6c8cc;
+  cursor: pointer;
+  font-weight: 600;
+  color: #494A4A;
+
+}
+
+/* .streamButton:hover {
+  border: 1px solid #0266da;
+  background-color: #D5E8FF;
+  color: #1E1E22;
+} */

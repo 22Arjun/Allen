@@ -23,6 +23,7 @@ export const Carousel = ({ activeIndex }) => {
       style={imageStyles}
       src={frame[activeIndex]} 
       className='fade-animation'
+      draggable={false}
       />
       
 
