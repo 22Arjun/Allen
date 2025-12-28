@@ -4,7 +4,7 @@ import frame1 from '../assets/frame2.webp'
 import frame2 from '../assets/frame3.webp'
 import frame3 from '../assets/frame4.webp'
 
-export const Carousel = ({ activeIndex }) => {
+export const Carousel = ({ activeIndex, carouselStyles }) => {
 
 
     const imageStyles = {
@@ -17,7 +17,7 @@ export const Carousel = ({ activeIndex }) => {
     const frame = [frame0, frame1, frame2, frame3];
 
   return (
-    <div style={{width: '1032px', margin: '0 auto', height: '350px', backgroundColor: 'transparent', marginTop: '80px', borderRadius: '34px', position: 'relative'}}>
+    <div style={carouselStyles}>
       <img 
       key={activeIndex}
       style={imageStyles}

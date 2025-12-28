@@ -8,8 +8,10 @@ import arrow from './assets/arrow.webp';
 import classes from './assets/classes.webp';
 import JEE from './assets/JEE Courses.webp';
 import NEET from './assets/Neet Courses.webp';
+import original from './assets/original.png';
 import { CourseCard } from './components/CourseCard';
 import { ClickButton } from './components/ClickButton';
+import { BatchSelect } from './components/BatchSelect';
 
 // import { BrowserRouter, Router, Route } from 'react-router-dom';
 const App = () => {
@@ -22,6 +24,17 @@ const App = () => {
     {img: JEE, h3: 'JEE Courses'},
     {img: classes, h3: 'Courses for class 6-10'}
   ]
+
+
+  const carouselStyles = {
+    width: '1032px',
+    margin: '0 auto',
+    height: '350px',
+    backgroundColor: 'transparent',
+    marginTop: '80px',
+    borderRadius: '34px',
+    position: 'relative'
+  }
 
 
   const dotStyles = {
@@ -52,11 +65,7 @@ const buttonData = [
     { text : 'Class 6-10' }
   ]
 
-  const activeStyles = {
-        border: '1px solid #0266da',
-        backgroundColor: '#D5E8FF',
-        color: '#1E1E22'
-    }
+  
   
 
 
@@ -75,7 +84,7 @@ const buttonData = [
         </div>
       </div>
       <div style={{backgroundColor: '#edf2fa', display: 'flex', flexDirection: 'column', paddingBottom: '50px'}}>
-        <Carousel activeIndex={activeIndex}></Carousel>
+        <Carousel carouselStyles={carouselStyles} activeIndex={activeIndex}></Carousel>
         <div style={{display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '14px'}}>
 
           {[0, 1, 2, 3].map((index) => (
@@ -116,13 +125,36 @@ const buttonData = [
               key={index}
               onClick={() => setActiveButton(index)}
               text={button.text}
-              style={{...(activeButton===index ? activeStyles : {})}}
+              isActive={activeButton===index}
             />
 
             ))}
             
           </div>
         </div>
+      </div>
+      
+
+      <div style={{backgroundColor: '#edf2fa', height: '471.5px'}}>
+
+      <BatchSelect />
+      </div>
+
+      <div style={{backgroundColor: '#edf2fa', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '32px 0px 8px'}}>
+        <button className='viewAllCoursesBtn' style={{height: '44px', width: '150px', borderRadius: '9999px', border: 'none', fontSize: '.875rem', fontWeight: 700, textAlign: 'center', cursor: 'pointer'}}>View All Courses</button>
+      </div>
+
+      <div className="container-v1" style={{display: 'flex'}}>
+        <img width={'1032px'} src={original} style={{margin: '0 auto', padding: '2.25rem 0'}} />
+      </div>
+
+      <div style={{display: 'flex'}}>
+        <section style={{width: '1032px', margin: '0 auto', padding: '48px 0'}}>
+          <h2 style={{lineHeight: '30px', margin: 0}}>What's Trending</h2>
+          <Carousel 
+          
+          />
+        </section>
       </div>
 
     </div>

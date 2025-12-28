@@ -101,11 +101,22 @@ html, body {
   cursor: pointer;
   font-weight: 600;
   color: #494A4A;
+  transition: all 0.185s ease-out;
 
 }
 
-/* .streamButton:hover {
-  border: 1px solid #0266da;
-  background-color: #D5E8FF;
+.streamButton:hover {
   color: #1E1E22;
-} */
+}
+
+.viewAllCoursesBtn {
+  background-color: #025fca;
+  color: white;
+}
+
+.viewAllCoursesBtn:hover {
+  background-color: #00489b;
+  color: rgba(255, 255, 255, 0.714);
+}
+
+
