@@ -4,26 +4,41 @@ import { Carousel } from './components/Carousel';
 import './App.css';
 import loud from './assets/loud.png';
 import shine from './assets/star.webp';
+import frame0 from './assets/frame1.webp'
+import frame1 from './assets/frame2.webp'
+import frame2 from './assets/frame3.webp'
+import frame3 from './assets/frame4.webp'
 import arrow from './assets/arrow.webp';
 import classes from './assets/classes.webp';
 import JEE from './assets/JEE Courses.webp';
 import NEET from './assets/Neet Courses.webp';
 import original from './assets/original.png';
+import Banner0 from './assets/Banner0.webp';
+import Banner1 from './assets/Banner1.webp';
+import Banner2 from './assets/Banner2.webp';
+import Banner3 from './assets/Banner3.webp';
+import Banner4 from './assets/Banner4.webp';
+import Banner5 from './assets/Banner5.jpg';
+
 import { CourseCard } from './components/CourseCard';
 import { ClickButton } from './components/ClickButton';
 import { BatchSelect } from './components/BatchSelect';
+
 
 // import { BrowserRouter, Router, Route } from 'react-router-dom';
 const App = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeButton, setActiveButton] = useState({});
+  const [activeDot, setActiveDot] = useState(0);
 
   const data = [
     {img: NEET, h3: 'NEET Courses'},
     {img: JEE, h3: 'JEE Courses'},
     {img: classes, h3: 'Courses for class 6-10'}
   ]
+
+  const frames = [frame0, frame1, frame2, frame3];
 
 
   const carouselStyles = {
@@ -32,8 +47,7 @@ const App = () => {
     height: '350px',
     backgroundColor: 'transparent',
     marginTop: '80px',
-    borderRadius: '34px',
-    position: 'relative'
+    borderRadius: '34px'
   }
 
 
@@ -53,10 +67,11 @@ const App = () => {
 
 useEffect(() => {
   const interval = setInterval(() => {
-    setActiveIndex(prevIndex => (prevIndex < 3 ? prevIndex + 1 : 0))
+    setActiveIndex(prevIndex => (prevIndex < 3 ? prevIndex + 1 : 0));
+    setActiveDot(prevIndex => prevIndex < 5 ? prevIndex + 1 : 0);
   }, 7000)
   return () => clearInterval(interval);
-}, [activeIndex]);
+}, [activeIndex, activeDot]);
 
 
 const buttonData = [
@@ -66,8 +81,29 @@ const buttonData = [
   ]
 
   
+  const banner = [Banner0, Banner1, Banner2, Banner3, Banner4, Banner5];
   
+  const bannerStyles = {
+    width: '1032px',
+    margin: '0 auto',
+    height: '350px',
+    backgroundColor: 'transparent',
+    marginTop: '0px',
+    borderRadius: '2rem',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 
+
+  const bannerDotStyles = {
+    backgroundColor: '#0F0F0F33',
+    width: '12px',
+    height: '12px',
+    borderRadius: '50%',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease-out'
+  }
 
   return (
     <div className='wrapper'>
@@ -84,7 +120,7 @@ const buttonData = [
         </div>
       </div>
       <div style={{backgroundColor: '#edf2fa', display: 'flex', flexDirection: 'column', paddingBottom: '50px'}}>
-        <Carousel carouselStyles={carouselStyles} activeIndex={activeIndex}></Carousel>
+        <Carousel images={frames} carouselStyles={carouselStyles} arrayIndex={activeIndex}></Carousel>
         <div style={{display: 'flex', gap: '16px', justifyContent: 'center', marginTop: '14px'}}>
 
           {[0, 1, 2, 3].map((index) => (
@@ -117,7 +153,7 @@ const buttonData = [
         </div>
       </div>
 
-      <div style={{backgroundColor: '#f7f9ff', width: '100%', height: '114px'}}>
+      <div style={{backgroundColor: '#f7f9ff', width: '100%', height: '114px', padding: '16px 0'}}>
         <div style={{width: '1032px', display: 'flex', flexDirection: 'column', margin: '0 auto', userSelect: 'none'}}>
           <h2>Trending Courses</h2>
           <div style={{display: 'flex', gap: '12px'}}>
@@ -144,16 +180,26 @@ const buttonData = [
         <button className='viewAllCoursesBtn' style={{height: '44px', width: '150px', borderRadius: '9999px', border: 'none', fontSize: '.875rem', fontWeight: 700, textAlign: 'center', cursor: 'pointer'}}>View All Courses</button>
       </div>
 
-      <div className="container-v1" style={{display: 'flex'}}>
+      <div className="container-v1" style={{display: 'flex', backgroundColor: '#edf2fa'}}>
         <img width={'1032px'} src={original} style={{margin: '0 auto', padding: '2.25rem 0'}} />
       </div>
 
-      <div style={{display: 'flex'}}>
-        <section style={{width: '1032px', margin: '0 auto', padding: '48px 0'}}>
-          <h2 style={{lineHeight: '30px', margin: 0}}>What's Trending</h2>
+      <div style={{display: 'flex', backgroundColor: '#edf2fa'}}>
+        <section style={{width: '1032px', margin: '0 auto', padding: '48px 0', display: 'flex', flexDirection: 'column'}}>
+          <h2 style={{lineHeight: '30px', margin: '0 auto'}}>What's Trending</h2>
           <Carousel 
-          
+          images={banner}
+          arrayIndex={activeDot}
+          carouselStyles={bannerStyles}
           />
+          <div style={{display: 'flex', gap: '8px', justifyContent: 'center', alignItems: 'center'}}>
+            {[0, 1, 2, 3, 4, 5].map((index) => (
+              <div 
+              onClick={() => (setActiveDot(index))}
+              style={{...bannerDotStyles, backgroundColor: activeDot === index ? activeColor : inactiveColor, width: (activeDot === 5 || activeDot === 4 )&& index > 2 ? '12px' : (activeDot === 5 || activeDot === 4)&& index === 2 ? '8px' : (activeDot === 5 || activeDot === 4)&& index < 2 ? '6px' : (activeDot === 2 || activeDot === 3) && (index === 1 || index === 4) ? '8px' : (activeDot === 2 || activeDot === 3) && (index === 0 || index === 5) ? '6px' : (activeDot === 2 || activeDot === 3) && (index === 2 || index === 3) ? '12px' : (activeDot === 0 || activeDot === 1) && index < 3 ? '12px' : (activeDot === 0 || activeDot === 1) && index > 3 ? '6px' : '8px', height : (activeDot === 5 || activeDot === 4 )&& index > 2 ? '12px' : (activeDot === 5 || activeDot === 4)&& index === 2 ? '8px' : (activeDot === 5 || activeDot === 4)&& index < 2 ? '6px' : (activeDot === 2 || activeDot === 3) && (index === 1 || index === 4) ? '8px' : (activeDot === 2 || activeDot === 3) && (index === 0 || index === 5) ? '6px' : (activeDot === 2 || activeDot === 3) && (index === 2 || index === 3) ? '12px' : (activeDot === 0 || activeDot === 1) && index < 3 ? '12px' : (activeDot === 0 || activeDot === 1) && index > 3 ? '6px' : '8px'}}
+              ></div>
+            ))}
+          </div>
         </section>
       </div>
 
