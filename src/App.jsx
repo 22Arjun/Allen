@@ -108,14 +108,14 @@ const buttonData = [
   return (
     <div className='wrapper'>
       <Nav></Nav>
-      <div style={{width: '100%', height: '40px', backgroundColor: '#019370', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', userSelect: 'none'}}>
+      <div style={{width: '100%', height: '40px', backgroundColor: '#019370', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', userSelect: 'none', position: 'sticky', top: '72px', zIndex: 9999}}>
         <div style={{display: 'flex', alignItems: 'center'}}>
           <img width={32} draggable={false} src={loud} alt={"Speaker"} style={{aspectRatio: '1/1'}} />
           <span style={{color: '#F8FD05', fontSize: '12px', fontWeight: 600}}>LAST CHANCE TO GET 15% OFF</span>
         </div>
         <img width={24} height={24} src={shine} alt={'Shining'} />
         <div style={{display: 'flex', alignItems: 'center'}}>
-          <span style={{fontSize: '14px', color: '#FFFF', fontWeight: 600, marginLeft: '12px', marginRight: '12px', padding: '12px 0px'}}>Extended Early Bird Offer ends 28th Dec</span>
+          <span style={{fontSize: '14px', color: '#FFFF', fontWeight: 600, marginLeft: '12px', marginRight: '12px', padding: '12px 0px'}}>Extended Early Bird Offer ends 28th Jan</span>
           <img width={24} height={24} src={arrow} alt={"arrow"} />
         </div>
       </div>
@@ -171,9 +171,11 @@ const buttonData = [
       </div>
       
 
-      <div style={{backgroundColor: '#edf2fa', height: '471.5px'}}>
-
-      <BatchSelect />
+      <div style={{backgroundColor: '#edf2fa'}}>
+        <div style={{backgroundColor: '#edf2fa', width: '1032px', height: '471.5px', margin: '0 auto', display: 'flex', gap: '1.5rem', padding: '20px 0px'}}>
+          <BatchSelect />
+          <BatchSelect />
+        </div>
       </div>
 
       <div style={{backgroundColor: '#edf2fa', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '32px 0px 8px'}}>
@@ -192,7 +194,7 @@ const buttonData = [
           arrayIndex={activeDot}
           carouselStyles={bannerStyles}
           />
-          <div style={{display: 'flex', gap: '8px', justifyContent: 'center', alignItems: 'center'}}>
+          <div style={{display: 'flex', gap: '.85rem', justifyContent: 'center', alignItems: 'center'}}>
             {[0, 1, 2, 3, 4, 5].map((index) => (
               <div 
               onClick={() => (setActiveDot(index))}
