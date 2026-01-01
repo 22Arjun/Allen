@@ -19,6 +19,8 @@ import Banner2 from './assets/Banner2.webp';
 import Banner3 from './assets/Banner3.webp';
 import Banner4 from './assets/Banner4.webp';
 import Banner5 from './assets/Banner5.jpg';
+import onlineBanner0 from './assets/onlineBanner0.png';
+import onlineBanner1 from './assets/onlineBanner1.png'
 
 import { CourseCard } from './components/CourseCard';
 import { ClickButton } from './components/ClickButton';
@@ -31,6 +33,7 @@ const App = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeButton, setActiveButton] = useState({});
   const [activeDot, setActiveDot] = useState(0);
+  const [activeOnline, setActiveOnline] = useState(0);
 
   const data = [
     {img: NEET, h3: 'NEET Courses'},
@@ -73,6 +76,13 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, [activeIndex, activeDot]);
 
+useEffect(() => {
+  const interval = setInterval(() => {
+    setActiveOnline(prevIndex => prevIndex < 1 ? prevIndex + 1 : 0);
+  }, 5000)
+
+  return () => clearInterval(interval);
+}, [activeOnline])
 
 const buttonData = [
     { text : 'NEET' },
@@ -104,6 +114,9 @@ const buttonData = [
     cursor: 'pointer',
     transition: 'all 0.3s ease-out'
   }
+
+
+  const onlineBanner = [onlineBanner0, onlineBanner1];
 
   return (
     <div className='wrapper'>
@@ -204,6 +217,27 @@ const buttonData = [
           </div>
         </section>
       </div>
+
+
+      <div style={{display: 'flex', backgroundColor: '#edf2fa'}}>
+        <section style={{width: '1032px', margin: '0 auto', padding: '48px 0', display: 'flex', flexDirection: 'column'}}>
+          <h2 style={{lineHeight: '30px', margin: '0 auto'}}>Meet Our 2024 Champions</h2>
+          <Carousel 
+          images={onlineBanner}
+          arrayIndex={activeOnline}
+          carouselStyles={carouselStyles}
+          />
+          <div style={{display: 'flex', gap: '.85rem', justifyContent: 'center', alignItems: 'center'}}>
+            {[0, 1].map((index) => (
+              <div 
+              onClick={() => (setActiveOnline(index))}
+              style={{...dotStyles, backgroundColor: activeOnline === index ? activeColor : inactiveColor}}
+              ></div>
+            ))}
+          </div>
+        </section>
+      </div>  
+
 
     </div>
   )
